@@ -6,12 +6,12 @@
     <title>Be My Valentine</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif; /* Cuter font */
+            font-family: 'Arial', sans-serif; /* More readable font */
             background: linear-gradient(135deg, #ffb6c1, #ffe4e1, #f8c8dc); /* Pastel pink gradient */
             color: #333;
             text-align: center;
             margin: 0;
-            padding: 0;
+            padding: 20px; /* Added padding for better layout */
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -39,17 +39,22 @@
             100% { transform: translateY(-10vh) rotate(360deg); }
         }
         .container {
-            width: 100vw;
-            height: 100vh;
+            width: 90vw; /* Slightly smaller for better layout */
+            max-width: 600px;
+            height: auto; /* Auto height for better fit */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
             z-index: 2;
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for readability */
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         .penguin {
-            width: 150px;
+            width: 120px; /* Slightly smaller for layout */
             height: auto;
             margin-bottom: 20px;
             animation: bounce 2s infinite;
@@ -60,7 +65,7 @@
             60% { transform: translateY(-5px); }
         }
         .message {
-            font-size: 2em;
+            font-size: 1.5em; /* Adjusted for readability */
             line-height: 1.6;
             margin: 20px 0;
             transition: all 0.5s;
@@ -103,6 +108,8 @@
             background: linear-gradient(45deg, #32cd32, #90ee90); /* Green gradient */
             padding: 20px 40px;
             font-size: 1.5em;
+            transform: scale(1); /* Initial scale */
+            transition: transform 0.3s ease;
         }
         .yes:hover { background: linear-gradient(45deg, #228b22, #6b8e23); }
         .no {
@@ -147,13 +154,13 @@
     </div>
     <div class="container">
         <img src="https://i.imgur.com/4Q8Z8ZJ.png" alt="Cute Blue Penguin" class="penguin">
-        <div class="message" id="message">Hi love love <img src="https://i.imgur.com/4Q8Z8ZJ.png" alt="Cute Blue Penguin" style="width: 50px; vertical-align: middle;"> 💖,</div>
+        <div class="message" id="message">Hi love love <img src="https://i.imgur.com/4Q8Z8ZJ.png" alt="Cute Blue Penguin" style="width: 40px; vertical-align: middle; margin: 0 5px;"> 💖,</div>
         <div class="hearts" id="hearts">❤️💕💖💞✨</div>
         <div class="buttons">
             <button class="next" id="nextBtn" onclick="nextPage()">hello ✨</button>
             <div class="hidden" id="finalButtons">
-                <button class="yes" onclick="yesClicked()">Yes! 💖</button>
-                <button class="no" onclick="alert('Aww, but I\'ll keep trying! 😢')">No thanks 😢</button>
+                <button class="yes" id="yesBtn" onclick="yesClicked()">Yes! 💖</button>
+                <button class="no" onclick="noClicked()">No thanks 😢</button>
             </div>
         </div>
         <div class="fill-screen hidden" id="yesScreen">Yay! You said yes! 😘 💕</div>
@@ -161,11 +168,11 @@
 
     <script>
         const messageParts = [
-            "Hi love love <img src='https://i.imgur.com/4Q8Z8ZJ.png' alt='Cute Blue Penguin' style='width: 50px; vertical-align: middle;'> 💖,",
-            "Hi love love <img src='https://i.imgur.com/4Q8Z8ZJ.png' alt='Cute Blue Penguin' style='width: 50px; vertical-align: middle;'> 💖, I know that you're too busy lalo na sa order ✨,",
-            "Hi love love <img src='https://i.imgur.com/4Q8Z8ZJ.png' alt='Cute Blue Penguin' style='width: 50px; vertical-align: middle;'> 💖, I know that you're too busy lalo na sa order ✨, but for today and tom, can I have you time :>> 💕,",
-            "Hi love love <img src='https://i.imgur.com/4Q8Z8ZJ.png' alt='Cute Blue Penguin' style='width: 50px; vertical-align: middle;'> 💖, I know that you're too busy lalo na sa order ✨, but for today and tom, can I have you time :>> 💕, tho I don't have much for tom 👀,",
-            "Hi love love <img src='https://i.imgur.com/4Q8Z8ZJ.png' alt='Cute Blue Penguin' style='width: 50px; vertical-align: middle;'> 💖, I know that you're too busy lalo na sa order ✨, but for today and tom, can I have you time :>> 💕, tho I don't have much for tom 👀, may I have a 2 part celeb with you :>> 😤"
+            "Hi love love <img src='https://i.imgur.com/4Q8Z8ZJ.png' alt='Cute Blue Penguin' style='width: 40px; vertical-align: middle; margin: 0 5px;'> 💖,",
+            "Hi love love <img src='https://i.imgur.com/4Q8Z8ZJ.png' alt='Cute Blue Penguin' style='width: 40px; vertical-align: middle; margin: 0 5px;'> 💖, I know that you're too busy lalo na sa order ✨,",
+            "Hi love love <img src='https://i.imgur.com/4Q8Z8ZJ.png' alt='Cute Blue Penguin' style='width: 40px; vertical-align: middle; margin: 0 5px;'> 💖, I know that you're too busy lalo na sa order ✨, but for today and tom, can I have you time :>> 💕,",
+            "Hi love love <img src='https://i.imgur.com/4Q8Z8ZJ.png' alt='Cute Blue Penguin' style='width: 40px; vertical-align: middle; margin: 0 5px;'> 💖, I know that you're too busy lalo na sa order ✨, but for today and tom, can I have you time :>> 💕, tho I don't have much for tom 👀,",
+            "Hi love love <img src='https://i.imgur.com/4Q8Z8ZJ.png' alt='Cute Blue Penguin' style='width: 40px; vertical-align: middle; margin: 0 5px;'> 💖, I know that you're too busy lalo na sa order ✨, but for today and tom, can I have you time :>> 💕, tho I don't have much for tom 👀, may I have a 2 part celeb with you :>> 😤"
         ];
         const buttonLabels = [
             "hello ✨",
@@ -175,6 +182,7 @@
             "tapos😤"
         ];
         let currentPage = 0;
+        let yesScale = 1;
 
         function nextPage() {
             currentPage++;
@@ -191,6 +199,11 @@
 
         function yesClicked() {
             document.getElementById('yesScreen').classList.remove('hidden');
+        }
+
+        function noClicked() {
+            yesScale += 0.2; // Increase scale on each No click
+            document.getElementById('yesBtn').style.transform = `scale(${yesScale})`;
         }
     </script>
 </body>
